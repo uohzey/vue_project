@@ -31,10 +31,10 @@
           ></el-input>
         </el-form-item>
       </el-form>
-      <el-checkbox v-model="ready" class="login-ready"
+      <!-- <el-checkbox v-model="ready" class="login-ready"
         >我已阅读并同意
         <span>相关协议</span>
-      </el-checkbox>
+      </el-checkbox> -->
       <div class="login-button">
         <el-button round type="primary">登录</el-button>
       </div>
