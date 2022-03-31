@@ -1,35 +1,98 @@
-# vue_project
+# 项目日志
 
-### Vue前台项目
+#### 2020/3/30
 
-#### 技术架构
+- 登录界面设计
 
-vue2 + webpack + vuex + vue-router + axios + less..
+  ![](./pics/Login.png)
 
-#### 软件架构
-- 封装通用组件
-- 登录注册
-- token
-- 守卫
-- 购物车
-- 支付
-- 项目性能优化
+- 将项目打包到另一台电脑上
 
-### Vue后台项目
+  - 安装node_modules
 
-#### 技术架构
+  ```shell
+  npm i
+  ```
 
-vue2 + webpack + vuex + vue-router + axios + scss + elementUI..
+- 登录事件处理
 
-#### 项目架构
+  ![](./pics/LoginErrorMessage.png)
 
-- elementUI
-- 菜单权限
-- 按钮权限
-- 数据可视化
+- 调用后端接口axios,配置响应拦截器文件api.js
 
-#### 数据可视化
+#### 2022/3/31
 
-- echarts数据可视化开源库
-- canvas画布
-- svg矢量图
+- 数据处理
+
+  - tips
+
+    - 使用python处理hdf文件导入mysql --mysql.ipynb
+    - 版本:pyhdf0.10.3(需要在官网下载安装包)+numpy1.20.1(用1.19报错)
+    - 电脑磁盘转速太低了...用其他电脑导入数据生成sql脚本,再导入
+
+    ```shell
+    %生成sql脚本(管理员身份运行)
+    C:\Windows\system32>mysqldump -u root -p camoc db>C:\db.sql
+    %导入sql脚本
+    %需要在mysql环境下
+    mysql-8.0.28-winx64\bin>mysql -u root -p
+    Enter password: ********
+    
+    mysql>use camoc
+    Data changed
+    
+    mysql> source C:\db.sql
+    ```
+
+- 主界面页面跳转
+
+  - 有两个
+
+  ```vue
+  <router-view/>
+  <!--默认跳转到App.vue 里的router-view
+  index.ts:将路由作为Home的children
+  -->
+  ```
+  - 将路由数据动态渲染到菜单栏
+  - v-if v-for不能同时使用,解决方案:在计算属性上遍历
+    - 原因:当 Vue 处理指令时，`v-for` 比 `v-if` 具有更高的优先级，哪怕我们只渲染出一小部分用户的元素，也得在每次重渲染的时候遍历整个列表，不论活跃用户是否发生了变化。
+  
+  ```vue
+  <el-menu router>
+      <el-submenu
+          index="1"
+          v-for="(item, index) in this.activeRoutes"
+          :key="index"
+      >
+          <template slot="title"
+          ><i class="el-icon-location"></i>常规气象参数{{
+              item.name
+          }}</template
+          >
+          <el-menu-item-group>
+          <el-menu-item
+              :index="children.path"
+              v-for="(children, indexj) in item.children"
+              :key="indexj"
+              >{{ children.name }}</el-menu-item
+          >
+          </el-menu-item-group>
+      </el-submenu>
+  </el-menu>
+  
+  <script>
+  export default {
+    name: "Home",
+    computed: {
+      activeRoutes: function () {
+        return this.$router.options.routes.filter(function (route) {
+          return !route.hidden;
+        });
+      },
+    },
+  };
+  </script>
+  ```
+  
+  

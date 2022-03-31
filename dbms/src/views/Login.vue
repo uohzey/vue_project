@@ -45,16 +45,17 @@ export default {
     top: 30%;
     display: flex;
     padding: 20px;
+    min-width: 600px;
+    min-height: 300px;
     justify-content: center;
     .login-bg {
       width: 50%;
+      min-height: 300px;
       background-color: rgba($color: #fff, $alpha: 0.4);
       border-radius: 10px 0px 0px 10px;
     }
     .login-form {
       width: 50%;
-      min-width: 250px;
-      min-height: 360px;
       background-color: #fff;
       padding: 10px;
       border-radius: 0 10px 10px 0;

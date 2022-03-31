@@ -18,9 +18,9 @@
         ref="LoginFormData"
         label-width="100px"
       >
-        <el-form-item label="手机号" prop="phone">
+        <el-form-item label="用户名" prop="username">
           <el-input
-            v-model="LoginFormData.phone"
+            v-model="LoginFormData.username"
             class="login-form-input"
           ></el-input>
         </el-form-item>
@@ -36,7 +36,7 @@
         <span>相关协议</span>
       </el-checkbox> -->
       <div class="login-button">
-        <el-button round type="primary">登录</el-button>
+        <el-button round type="primary" @click="submitLogin">登录</el-button>
       </div>
       <!-- <el-form-item type = "text" aria-autocomplete="false" v-model=""></el-form-item> -->
     </article>
@@ -51,18 +51,41 @@ export default {
   data() {
     return {
       LoginFormData: {
-        phone: "",
-        password: "",
+        username: "uohzey",
+        password: "123456",
       },
       rules: {
-        phone: [
-          { required: true, message: "请输入手机号码", trigger: "blur" },
-          { min: 11, max: 11, message: "请输入手机号码 ", trigger: "blur" },
+        username: [
+          // blur 失去焦点时触发
+          { required: true, message: "请输入用户名", trigger: "blur" },
+          { min: 5, max: 8, message: "请输入用户名", trigger: "blur" },
         ],
         password: [{ required: true, message: "请输入密码", trigger: "blur" }],
       },
       ready: false,
     };
+  },
+  methods: {
+    submitLogin() {
+      this.$refs.LoginFormData.validate((valid) => {
+        if (valid) {
+          this.$message({
+            message: "恭喜你，登录成功!",
+            type: "success",
+          });
+          this.$router.replace("/home");
+          // 通过axios调用后端接口
+          // postRequest("/login", this.LoginFormData).then((resp) => {
+          //   if (resp) {
+          //     this.$router.replace("/home");
+          //   }
+          // });
+        } else {
+          this.$message.error("请输入正确的账号密码! ");
+          return false;
+        }
+      });
+    },
   },
 };
 </script>
