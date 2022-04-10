@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "Acl",
+  name: "AtmosphereCoherenceLength",
 };
 </script>
 

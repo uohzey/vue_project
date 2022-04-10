@@ -28,7 +28,7 @@
 
     - 使用python处理hdf文件导入mysql --mysql.ipynb
     - 版本:pyhdf0.10.3(需要在官网下载安装包)+numpy1.20.1(用1.19报错)
-    - 电脑磁盘转速太低了...用其他电脑导入数据生成sql脚本,再导入
+    - 电脑磁盘转速太低了...用其他电脑导入数据生成sql脚本,再导入,两台电脑磁盘读写速度相差很大(1.3-11mb/s vs 0.1-0.3mb)
 
     ```shell
     %生成sql脚本(管理员身份运行)
@@ -43,6 +43,8 @@
     
     mysql> source C:\db.sql
     ```
+    
+    
 
 - 主界面页面跳转
 
@@ -96,3 +98,23 @@
   ```
   
   
+
+#### 2022/4/1
+
+- mysql导入数据主键相同:使用关键字,ignore忽略之后的主键相同值,replace替换主键相同值
+
+```mysql
+insert ignore into db() values()
+insert replace into db() values()
+```
+
+#### 2020/4/10
+
+- 学习nodejs时重新安装了nodejs,导致项目里node sass环境出错,解决方案:
+
+```shell
+npm rebuild node-sass
+```
+
+
+
