@@ -39,12 +39,13 @@ axios.interceptors.response.use(success => {
 })
 
 
-let base = ''
+let base = 'http://127.0.0.1:3007'
 // 传送json格式的post请求
 export const postRequest = (url, params) => {
     return axios({
         method: 'post',
         url: `${base}${url}`,
-        data: params,
+        //data就是body
+        data: params
     })
 }

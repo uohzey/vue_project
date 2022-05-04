@@ -46,13 +46,14 @@
 </template>
 
 <script>
+import { postRequest } from "../utils/api.js";
 export default {
   name: "LoginForm",
   data() {
     return {
       LoginFormData: {
-        username: "uohzey",
-        password: "123456",
+        username: "",
+        password: "",
       },
       rules: {
         username: [
@@ -69,17 +70,20 @@ export default {
     submitLogin() {
       this.$refs.LoginFormData.validate((valid) => {
         if (valid) {
-          this.$message({
-            message: "恭喜你，登录成功!",
-            type: "success",
-          });
-          this.$router.replace("/home");
-          // 通过axios调用后端接口
-          // postRequest("/login", this.LoginFormData).then((resp) => {
-          //   if (resp) {
-          //     this.$router.replace("/home");
-          //   }
+          // this.$message({
+          //   message: "恭喜你，登录成功!",
+          //   type: "success",
           // });
+          // this.$router.replace("/home");
+          // 通过axios调用后端接口
+          postRequest("/api/login", this.qs.stringify(this.LoginFormData)).then(
+            (res) => {
+              if (res) {
+                alert(JSON.stringify(res));
+                this.$router.replace("/home");
+              }
+            }
+          );
         } else {
           this.$message.error("请输入正确的账号密码! ");
           return false;
