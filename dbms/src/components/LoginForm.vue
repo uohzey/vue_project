@@ -70,17 +70,12 @@ export default {
     submitLogin() {
       this.$refs.LoginFormData.validate((valid) => {
         if (valid) {
-          // this.$message({
-          //   message: "恭喜你，登录成功!",
-          //   type: "success",
-          // });
-          // this.$router.replace("/home");
           // 通过axios调用后端接口
           postRequest("/api/login", this.qs.stringify(this.LoginFormData)).then(
             (res) => {
               if (res.status === 0) {
-                alert(JSON.stringify(res));
-                // this.$router.replace("/home");
+                // alert(JSON.stringify(res));
+                this.$router.replace("/home");
               }
             }
           );

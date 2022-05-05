@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <!-- background -->
-    <img :src="login_background" class="login-img" />
+    <img v-lazy="login_background" class="login-img" />
     <div class="login-card">
       <div class="login-bg"></div>
       <login-form class="login-form"></login-form>

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Login from '../views/Login.vue'
-import Home from '../views/Home.vue'
+import Home from '../views/HomePage.vue'
 import AtmosphereCoherenceLength from '../views/AtmosphereCoherenceLength.vue';
 import DFT from '../views/DFT.vue';
 import WeatherStation from '../views/WeatherStation.vue'
@@ -20,10 +20,6 @@ const routes = [
     name: 'Home',
     component: Home,
     children: [
-      {
-        path: '/acl',
-        name: '大气相干长度',
-      },
       {
         path: '/acl',
         name: '大气相干长度',

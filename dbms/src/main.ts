@@ -6,8 +6,10 @@ import router from './router'
 import store from './store'
 import qs from 'qs'
 import VueLazyload from 'vue-lazyload'
+import axios from 'axios';
 
 Vue.prototype.qs = qs
+Vue.prototype.$axios = axios
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 /* eslint-disable no-new */
