@@ -1,75 +1,6 @@
 <template>
-  <!-- <div>
-    <el-container>
-      <el-header>Header</el-header>
-      <el-container>
-        <el-aside width="250px">
-          <el-radio-group v-model="isCollapse" style="margin-bottom: 20px">
-            <el-radio-button :label="false">展开</el-radio-button>
-            <el-radio-button :label="true">收起</el-radio-button>
-          </el-radio-group>
-          <el-menu
-            router
-            default-active="1-4-1"
-            class="el-menu-vertical-demo"
-            @open="handleOpen"
-            @close="handleClose"
-            :collapse="isCollapse"
-          >
-            <el-submenu index="/home">
-              <template slot="title">
-                <i class="el-icon-location"></i>
-                <span slot="title">常规气象参数</span>
-              </template>
-              <el-menu-item-group>
-                <el-menu-item index="/acl">大气相干长度</el-menu-item>
-                <el-menu-item index="/dft">选项2</el-menu-item>
-              </el-menu-item-group>
-              <el-menu-item-group title="分组2">
-                <el-menu-item index="1-3">选项3</el-menu-item>
-              </el-menu-item-group>
-              <el-submenu index="1-4">
-                <span slot="title">选项4</span>
-                <el-menu-item index="1-4-1">选项1</el-menu-item>
-              </el-submenu>
-            </el-submenu>
-            <el-menu-item index="2">
-              <i class="el-icon-menu"></i>
-              <span slot="title">导航二</span>
-            </el-menu-item>
-          </el-menu>
-        </el-aside>
-        <el-container>
-          <el-header>
-            <div class="block">
-              <span class="demonstration"></span>
-              <el-date-picker
-                v-model="value2"
-                type="daterange"
-                align="right"
-                unlink-panels
-                range-separator="至"
-                start-placeholder="开始日期"
-                end-placeholder="结束日期"
-                :picker-options="pickerOptions"
-              >
-              </el-date-picker>
-            </div>
-          </el-header>
-          <el-aside>111</el-aside>
-          <el-main>
-            111
-            <router-view></router-view>
-          </el-main>
-
-          <el-footer></el-footer>
-        </el-container>
-      </el-container>
-      <el-footer>Footer</el-footer>
-    </el-container>
-  </div> -->
   <div>
-    <div class="header">头部</div>
+    <div class="header">Welcome!</div>
     <div class="navbar">
       <el-aside width="200px">
         <el-radio-group v-model="isCollapse" style="margin-bottom: 20px">
@@ -91,7 +22,7 @@
             </template>
             <el-menu-item-group>
               <el-menu-item index="/acl">大气相干长度</el-menu-item>
-              <el-menu-item index="/dft">选项2</el-menu-item>
+              <el-menu-item index="/dft">天空背景辐亮度</el-menu-item>
             </el-menu-item-group>
             <el-menu-item-group title="分组2">
               <el-menu-item index="1-3">选项3</el-menu-item>
@@ -109,13 +40,36 @@
       </el-aside>
     </div>
     <div class="main">
-      <div class="header">
+      <el-container>
+        <el-select
+          v-model="value"
+          placeholder="请选择时间间隔"
+          ref="timeInterval"
+        >
+          <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          >
+          </el-option>
+        </el-select>
+        <el-select v-model="valuePlace" placeholder="请选择地点" ref="place">
+          <el-option
+            v-for="item in optionsPlaces"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          >
+          </el-option>
+        </el-select>
         <div class="block">
           <span class="demonstration"></span>
           <el-date-picker
             v-model="value2"
             type="daterange"
             align="right"
+            value-format="yyyy-MM-dd"
             unlink-panels
             range-separator="至"
             start-placeholder="开始日期"
@@ -124,14 +78,16 @@
           >
           </el-date-picker>
         </div>
-      </div>
-      <div class="el-aside">111</div>
-      <div class="main">111 <router-view></router-view></div>
+        <el-button plain @click="handleClick(value2)">确定</el-button>
+      </el-container>
+      <div class="el-aside"></div>
+      <div class="main"><router-view></router-view></div>
     </div>
   </div>
 </template>
 
 <script>
+import { postRequest } from "../utils/api.js";
 export default {
   name: "HomePage",
   data() {
@@ -170,6 +126,44 @@ export default {
       },
       value1: "",
       value2: "",
+      options: [
+        {
+          value: "1",
+          label: "所有数据",
+        },
+        {
+          value: "2",
+          label: "每十秒",
+        },
+        {
+          value: "5",
+          label: "每分钟",
+        },
+        {
+          value: "30",
+          label: "每小时",
+        },
+        {
+          value: "180",
+          label: "每六小时",
+        },
+      ],
+      value: "",
+      optionsPlaces: [
+        {
+          value: "sansha",
+          label: "三沙",
+        },
+        {
+          value: "qingdao",
+          label: "青岛",
+        },
+        {
+          value: "huludao",
+          label: "葫芦岛",
+        },
+      ],
+      valuePlace: "",
     };
   },
   computed: {
@@ -180,6 +174,28 @@ export default {
     },
   },
   methods: {
+    getLabel() {
+      this.$nextTick(() => {
+        console.log(this.$refs.place.selected.value);
+      });
+    },
+    handleClick(date) {
+      //通过axios调用后端接口;
+      const place = this.$refs.place.selected.value;
+      // console.log(place);
+      const interval = this.$refs.timeInterval.selected.value;
+      // console.log(interval);
+      const newDate = {
+        place,
+        startDate: date[0],
+        endDate: date[1],
+        interval,
+      };
+      postRequest("/api/data/acl", this.qs.stringify(newDate)).then((res) => {
+        console.log();
+        console.log(res.data);
+      });
+    },
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
     },

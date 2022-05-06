@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+  <div>AtmosphereCoherenceLength</div>
 </template>
 
 <script>

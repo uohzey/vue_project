@@ -46,6 +46,6 @@ export const postRequest = (url, params) => {
         method: 'post',
         url: `${base}${url}`,
         //data就是body
-        data: params
+        data: params,
     })
 }
