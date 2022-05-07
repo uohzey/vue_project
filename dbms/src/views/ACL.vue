@@ -7,10 +7,10 @@
 <script>
 import SearchForm from "../components/SearchForm.vue";
 export default {
-  name: "DFT",
+  name: "ACL",
   components: { SearchForm },
 };
 </script>
 
-<style scoped>
+<style>
 </style>

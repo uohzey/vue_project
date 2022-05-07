@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "MeteorologicalParameter",
+  name: "MPL",
 };
 </script>
 

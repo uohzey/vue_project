@@ -1,29 +1,28 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
-import Login from '../views/Login.vue'
-import Home from '../views/HomePage.vue'
-import AtmosphereCoherenceLength from '../views/AtmosphereCoherenceLength.vue';
+import LoginInterface from '../views/LoginInterface.vue'
+import HomePage from '../views/HomePage.vue'
+import ACL from '../views/ACL.vue';
 import DFT from '../views/DFT.vue';
-import WeatherStation from '../views/WeatherStation.vue'
-import Profile from '../views/DFT.vue';
+import WS from '../views/WS.vue'
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
     name: 'Login',
-    component: Login,
+    component: LoginInterface,
     hidden: true
   },
   {
     path: '/home',
     name: 'Home',
-    component: Home,
+    component: HomePage,
     children: [
       {
         path: '/acl',
         name: '大气相干长度',
-        component: AtmosphereCoherenceLength
+        component: ACL
       },
       {
         path: '/dft',
@@ -33,14 +32,14 @@ const routes = [
       {
         path: '/ws',
         name: '气象参数',
-        component: WeatherStation
+        component: WS
       },
     ]
   },
   {
     path: '/profile',
     name: '廓线参数',
-    component: Login,
+    component: LoginInterface,
     hidden: true
   },
 

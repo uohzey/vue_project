@@ -55,7 +55,7 @@
 <script>
 import { postRequest } from "../utils/api.js";
 export default {
-  name: "InnerForm",
+  name: "SearchForm",
   data() {
     return {
       isCollapse: true,
@@ -135,6 +135,7 @@ export default {
   methods: {
     handleClick(date) {
       //通过axios调用后端接口;
+      //通过$refs访问组件
       const place = this.$refs.place.selected.value;
       // console.log(place);
       const interval = this.$refs.timeInterval.selected.value;
