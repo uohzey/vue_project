@@ -3,6 +3,11 @@ import { Message } from 'element-ui';
 import router from '../router'
 
 
+//请求拦截器
+axios.interceptors.request.use(config => {
+    config.headers.Authorization = window.sessionStorage.getItem('token')
+    return config
+})
 // 响应拦截器
 axios.interceptors.response.use(success => {
     // 业务逻辑错误

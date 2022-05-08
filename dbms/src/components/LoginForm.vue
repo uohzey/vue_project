@@ -46,47 +46,55 @@
 </template>
 
 <script>
-import { postRequest } from "../utils/api.js";
 export default {
-  name: "LoginForm",
+  name: 'LoginForm',
   data() {
     return {
       LoginFormData: {
-        username: "",
-        password: "",
+        username: 'admin',
+        password: '000000',
       },
       rules: {
         username: [
           // blur 失去焦点时触发
-          { required: true, message: "请输入用户名", trigger: "blur" },
-          { min: 5, max: 8, message: "请输入用户名", trigger: "blur" },
+          { required: true, message: '请输入用户名', trigger: 'blur' },
+          { min: 5, max: 8, message: '请输入用户名', trigger: 'blur' },
         ],
-        password: [{ required: true, message: "请输入密码", trigger: "blur" }],
+        password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
       },
       ready: false,
-    };
+    }
   },
   methods: {
     submitLogin() {
-      this.$refs.LoginFormData.validate((valid) => {
+      this.$refs.LoginFormData.validate(async (valid) => {
         if (valid) {
           // 通过axios调用后端接口
-          postRequest("/api/login", this.qs.stringify(this.LoginFormData)).then(
-            (res) => {
-              if (res.status === 0) {
-                // alert(JSON.stringify(res));
-                this.$router.replace("/home");
-              }
-            }
-          );
-        } else {
-          this.$message.error("请输入正确的账号密码! ");
-          return false;
+          // postRequest("/api/login", this.qs.stringify(this.LoginFormData)).then(
+          //   (res) => {
+          //     if (res.status === 0) {
+          //       // alert(JSON.stringify(res));
+          //       this.$router.replace("/home");
+          //     }
+          //   }
+          // );
+          const { data: res } = await this.$axios.post(
+            '/api/login',
+            this.qs.stringify(this.LoginFormData)
+          )
+          if (res.status !== 200) {
+            return this.$message.error('登陆失败')
+          }
+          this.$message.success('登陆成功')
+          // console.log(res.token);
+          //将登录成功后的token保存到客户端的seesionStorage
+          window.sessionStorage.setItem('token', res.token)
+          this.$router.push('/home')
         }
-      });
+      })
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>

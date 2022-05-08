@@ -1,15 +1,15 @@
 <template>
   <div>
-    <search-form></search-form>
+    <search-form params="dft"></search-form>
   </div>
 </template>
 
 <script>
-import SearchForm from "../components/SearchForm.vue";
+import SearchForm from '../../components/SearchForm.vue'
 export default {
-  name: "DFT",
+  name: 'DFT',
   components: { SearchForm },
-};
+}
 </script>
 
 <style scoped>

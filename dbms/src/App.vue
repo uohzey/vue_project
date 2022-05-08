@@ -6,9 +6,9 @@
 
 <script>
 export default {
-  name: "App",
+  name: 'App',
   components: {},
-};
+}
 </script>
 
 
@@ -19,8 +19,8 @@ export default {
   text-align: center;
   color: #071f36;
   letter-spacing: 1px;
-  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
-    "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
 }
 body {
   margin: 0px;

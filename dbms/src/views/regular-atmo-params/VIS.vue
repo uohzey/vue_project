@@ -1,15 +1,15 @@
 <template>
   <div>
-    <search-form></search-form>
+    <search-form params="vis"></search-form>
   </div>
 </template>
 
 <script>
-import SearchForm from "../components/SearchForm.vue";
+import SearchForm from '../../components/SearchForm.vue'
 export default {
-  name: "ACL",
+  name: 'VIS',
   components: { SearchForm },
-};
+}
 </script>
 
 <style>

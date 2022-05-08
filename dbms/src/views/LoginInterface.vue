@@ -11,17 +11,17 @@
 </template>
  
 <script>
-import LoginForm from "../components/LoginForm.vue";
-import login_background from "../assets/images/login/login_background.jpg";
+import LoginForm from '../components/LoginForm.vue'
+import login_background from '../assets/images/login/login_background.jpg'
 export default {
-  name: "LoginInter",
+  name: 'LoginInter',
   components: { LoginForm },
   data() {
     return {
       login_background,
-    };
+    }
   },
-};
+}
 </script>
 
 <style lang="scss">
