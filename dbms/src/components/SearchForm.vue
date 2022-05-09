@@ -45,7 +45,7 @@
         </div>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="handleClick(value2)">查询</el-button>
+        <el-button type="primary" @click="getDataList(value2)">查询</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -53,12 +53,13 @@
 
 
 <script>
-import { postRequest } from '../utils/api.js'
 export default {
   name: 'SearchForm',
   props: ['params'],
   data() {
     return {
+      total: 0,
+      dataList: [],
       isCollapse: true,
       pickerOptions: {
         shortcuts: [
@@ -135,7 +136,7 @@ export default {
   },
 
   methods: {
-    handleClick(date) {
+    async getDataList(date) {
       //通过axios调用后端接口;
       //通过$refs访问组件
       const place = this.$refs.place.selected.value
@@ -149,9 +150,13 @@ export default {
         endDate: date[1],
         interval,
       }
-      postRequest(newUrl, this.qs.stringify(newDate)).then((res) => {
-        console.log(res.data)
-      })
+      const { data: res } = await this.$axios.post(
+        newUrl,
+        this.qs.stringify(newDate)
+      )
+      this.$store.state.total = res.data.length
+      this.$store.state.dataList = res.data
+      console.log(this.dataList)
     },
   },
 }
