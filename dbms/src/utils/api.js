@@ -6,6 +6,7 @@ import router from '../router'
 //请求拦截器
 axios.interceptors.request.use(config => {
     config.headers.Authorization = window.sessionStorage.getItem('token')
+    // console.log(config)
     return config
 })
 // 响应拦截器

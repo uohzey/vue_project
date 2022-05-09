@@ -53,6 +53,7 @@
 
 
 <script>
+import { postRequest } from '../utils/api.js'
 export default {
   name: 'SearchForm',
   props: ['params'],
@@ -116,7 +117,7 @@ export default {
           label: '每六小时',
         },
       ],
-      value: '',
+      value: '1',
       optionsPlaces: [
         {
           value: 'sansha',
@@ -131,11 +132,31 @@ export default {
           label: '葫芦岛',
         },
       ],
-      valuePlace: '',
+      valuePlace: 'sansha',
     }
   },
 
   methods: {
+    handleClick(date) {
+      //通过axios调用后端接口;
+      //通过$refs访问组件
+      const place = this.$refs.place.selected.value
+      // console.log(place);
+      const interval = this.$refs.timeInterval.selected.value
+      // console.log(interval);
+      const newUrl = '/data/' + this.params
+      const newDate = {
+        place,
+        startDate: date[0],
+        endDate: date[1],
+        interval,
+      }
+      postRequest(newUrl, this.qs.stringify(newDate)).then((res) => {
+        this.dataList = res.data
+        this.$store.state.results = res.data
+        console.log(this.$store.state.results)
+      })
+    },
     async getDataList(date) {
       //通过axios调用后端接口;
       //通过$refs访问组件
@@ -154,9 +175,11 @@ export default {
         newUrl,
         this.qs.stringify(newDate)
       )
-      this.$store.state.total = res.data.length
-      this.$store.state.dataList = res.data
-      console.log(this.dataList)
+      this.total = res.data.length
+      this.dataList = res.data
+      this.$store.state.total = this.total
+      this.$store.state.dataList = this.dataList
+      console.log(this.$store.state.total)
     },
   },
 }

@@ -69,6 +69,15 @@ export default {
     submitLogin() {
       this.$refs.LoginFormData.validate(async (valid) => {
         if (valid) {
+          // 通过axios调用后端接口
+          // postRequest("/api/login", this.qs.stringify(this.LoginFormData)).then(
+          //   (res) => {
+          //     if (res.status === 0) {
+          //       // alert(JSON.stringify(res));
+          //       this.$router.replace("/home");
+          //     }
+          //   }
+          // );
           const { data: res } = await this.$axios.post(
             '/api/login',
             this.qs.stringify(this.LoginFormData)
