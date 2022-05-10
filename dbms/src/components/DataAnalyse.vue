@@ -3,7 +3,6 @@
     class="margin-top"
     title="数值分析"
     :column="3"
-    :size="size"
     border
   >
     <el-descriptions-item>

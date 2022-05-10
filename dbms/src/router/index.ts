@@ -2,12 +2,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import LoginInterface from '../views/LoginInterface.vue'
 import HomePage from '../views/HomePage.vue'
-import ACL from '../views/regular-atmo-params/ACL.vue';
-import DFT from '../views/regular-atmo-params/DFT.vue';
-import WS from '../views/regular-atmo-params/WS.vue'
-import VIS from '../views/regular-atmo-params/VIS.vue'
-import PAS from '../views/regular-atmo-params/PAS.vue'
-import TURB from '../views/regular-atmo-params/TURB.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -25,32 +19,32 @@ const routes = [
       {
         path: '/acl',
         name: '大气相干长度',
-        component: ACL
+        component: () => import('@/views/regular-atmo-params/ACL.vue')
       },
       {
         path: '/dft',
         name: '天空背景辐亮度',
-        component: DFT
+        component: () => import('@/views/regular-atmo-params/DFT.vue')
       },
       {
         path: '/turb',
         name: '折射率结构常数',
-        component: TURB
+        component: () => import('@/views/regular-atmo-params/TURB.vue')
       },
       {
         path: '/pas',
         name: '吸收系数',
-        component: PAS
+        component: () => import('@/views/regular-atmo-params/PAS.vue')
       },
       {
         path: '/ws',
         name: '气象参数',
-        component: WS
+        component: () => import('@/views/regular-atmo-params/WS.vue')
       },
       {
         path: '/vis',
         name: '能见度',
-        component: VIS
+        component: () => import('@/views/regular-atmo-params/VIS.vue')
       },
     ]
   },
