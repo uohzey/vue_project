@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import { Message } from 'element-ui'
 import SideBar from '../components/SideBar.vue'
 export default {
   name: 'HomePage',
@@ -27,6 +28,7 @@ export default {
   methods: {
     logout() {
       window.sessionStorage.clear()
+      Message.warning({message:'您已退出,请重新登录!'})
       this.$router.push('/login')
     },
   },

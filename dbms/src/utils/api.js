@@ -44,6 +44,25 @@ axios.interceptors.response.use(success => {
     return;
 })
 
+// axios.interceptors.response.use(res => {
+//     // 业务逻辑错误
+//     // http协议调到接口返回200
+//     // if (res.data.status && res.data.status == 200) {
+//     //     // 500 401 403
+//     //     // if (success.data.code == 500 || success.data.code == 401 || success.data.code == 403) {
+//     //     //     Message.error({ message: success.data.message })
+//     //     //     return
+//     //     // }
+//     //     Message.success({ message: res.data.message })
+//     //     return res.data
+//     // }
+//     if (res.data.status !== 200) {
+//         if (res.data.status === 2) {
+//             Message.error({ message: '密码错误!' })
+//         }
+//     }
+//     return;
+// })
 
 let base = 'http://127.0.0.1:3007'
 // 传送json格式的post请求

@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script lang = 'ts'>
+<script>
 export default {
   name: 'App',
   components: {},
@@ -22,19 +22,25 @@ export default {
   font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
     'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
 }
+
 body {
   margin: 0px;
 }
+
 #container {
   position: relative;
   margin-right: auto;
 }
+
 ::selection {
-  background: #96c7c9; /* Safari */
+  background: #96c7c9;
+  /* Safari */
   color: #ffffff;
 }
+
 ::-moz-selection {
-  background: #8fbbb9; /* Firefox */
+  background: #8fbbb9;
+  /* Firefox */
   color: #ffffff;
 }
 </style>

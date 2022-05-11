@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import LoginInterface from '../views/LoginInterface.vue'
 import HomePage from '../views/HomePage.vue'
+import { Message } from 'element-ui'
 Vue.use(VueRouter)
 
 const routes = [
@@ -73,6 +74,7 @@ router.beforeEach((to, from, next) => {
   //获取token
   const tokenStr = window.sessionStorage.getItem('token')
   if (!tokenStr) {
+    Message.error({ message: '您还未登录,请先登录!' })
     return next('/login')
   }
   next()

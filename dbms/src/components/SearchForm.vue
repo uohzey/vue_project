@@ -53,6 +53,7 @@
 
 
 <script>
+import { Message } from 'element-ui'
 import { postRequest } from '../utils/api.js'
 export default {
   name: 'SearchForm',
@@ -174,7 +175,12 @@ export default {
       const { data: res } = await this.$axios.post(
         newUrl,
         this.qs.stringify(newDate)
-      )
+      ).catch(err=>{
+        if(err){
+          Message.error({message:'登陆状态已失效,请重新登录!'})
+          return;
+        }
+      })
       this.total = res.data.length
       this.dataList = res.data
       this.$store.state.total = this.total
