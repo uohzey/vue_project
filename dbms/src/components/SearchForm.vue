@@ -139,6 +139,7 @@ export default {
 
   methods: {
     handleClick(date) {
+      
       //通过axios调用后端接口;
       //通过$refs访问组件
       const place = this.$refs.place.selected.value
@@ -159,6 +160,7 @@ export default {
       })
     },
     async getDataList(date) {
+      let startTime = Date.now()
       //通过axios调用后端接口;
       //通过$refs访问组件
       const place = this.$refs.place.selected.value
@@ -172,6 +174,7 @@ export default {
         endDate: date[1],
         interval,
       }
+      console.log('开始查询!请等待~');
       const { data: res } = await this.$axios.post(
         newUrl,
         this.qs.stringify(newDate)
@@ -181,11 +184,15 @@ export default {
           return;
         }
       })
+      console.log('查询结束!');
       this.total = res.data.length
       this.dataList = res.data
       this.$store.state.total = this.total
       this.$store.state.dataList = this.dataList
       console.log(this.$store.state.total)
+      let endTime = Date.now()
+      let pass = endTime - startTime
+      this.$store.state.passTime = pass + 'ms'
     },
   },
 }

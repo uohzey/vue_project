@@ -15,16 +15,16 @@
     <el-descriptions-item>
       <template slot="label">
         <i class="el-icon-mobile-phone"></i>
-        手机号
+        查询耗时
       </template>
-      18100000000
+      {{ this.$store.state.passTime}}
     </el-descriptions-item>
     <el-descriptions-item>
       <template slot="label">
         <i class="el-icon-location-outline"></i>
-        居住地
+        数值计算
       </template>
-      苏州市
+      
     </el-descriptions-item>
     <el-descriptions-item>
       <template slot="label">

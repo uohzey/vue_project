@@ -3,23 +3,34 @@
     <search-form params="acl" ref="aclData"></search-form>
     <el-button type="primary" @click="lazyLoading()">查询</el-button>
     <el-button type="primary" @click="flashList()">刷新</el-button>
-    <el-table :data="tableData" style="width: 50%" height="450">
-      <el-table-column prop="date" label="日期" width="180"> </el-table-column>
-      <el-table-column prop="time" label="时间" width="180"> </el-table-column>
-      <el-table-column prop="r0" label="r0"> </el-table-column>
-    </el-table>
+    <data-form :params="options"></data-form>
     <data-analyse></data-analyse>
   </div>
 </template>
 
 <script>
 import SearchForm from '../../components/SearchForm.vue'
+import DataForm from '@/components/DataForm.vue'
 import DataAnalyse from '../../components/DataAnalyse.vue'
 export default {
   name: 'ACL',
-  components: { SearchForm, DataAnalyse },
+  components: { SearchForm, DataAnalyse, DataForm },
   data() {
     return {
+      options:[
+        {
+          prop:'date',
+          label:'日期'
+        },
+        {
+          prop:'time',
+          label:'时间'
+        },
+        {
+          prop:'r0',
+          label:'r0'
+        }
+      ],
       loading: false,
       tableData: [],
       pagination: {
@@ -39,6 +50,9 @@ export default {
   // mounted() {
   //   //this.watchSize();
   //   this.lazyLoading()
+  // },
+  // mounted() {
+    
   // },
   created() {
     //this.defaultDataTime();

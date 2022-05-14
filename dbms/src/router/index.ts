@@ -2,10 +2,14 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import LoginInterface from '../views/LoginInterface.vue'
 import HomePage from '../views/HomePage.vue'
-import { Message } from 'element-ui'
+// import { Message } from 'element-ui'
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/',
+    redirect: '/login',
+  },
   {
     path: '/login',
     name: 'Login',
@@ -64,20 +68,20 @@ const router = new VueRouter({
 })
 
 //挂载路由导航守卫
-router.beforeEach((to, from, next) => {
-  //to: 将要访问的路径
-  //from: 从哪个路径跳转而来
-  //next: 放行 next('/xx')强制跳转
-  if (to.path === '/login') {
-    return next()
-  }
-  //获取token
-  const tokenStr = window.sessionStorage.getItem('token')
-  if (!tokenStr) {
-    Message.error({ message: '您还未登录,请先登录!' })
-    return next('/login')
-  }
-  next()
-})
+// router.beforeEach((to, from, next) => {
+//   //to: 将要访问的路径
+//   //from: 从哪个路径跳转而来
+//   //next: 放行 next('/xx')强制跳转
+//   if (to.path === '/login') {
+//     return next()
+//   }
+//   //获取token
+//   const tokenStr = window.sessionStorage.getItem('token')
+//   if (!tokenStr) {
+//     Message.error({ message: '您还未登录,请先登录!' })
+//     return next('/login')
+//   }
+//   next()
+// })
 
 export default router
