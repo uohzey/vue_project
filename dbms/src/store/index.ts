@@ -7,7 +7,7 @@ export default new Vuex.Store({
   state: {
     total: 0,
     dataList: [],
-    passTime: "",
+    passTime: 0,
   },
   getters: {
   },
