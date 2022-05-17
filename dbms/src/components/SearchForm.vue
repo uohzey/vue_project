@@ -57,7 +57,7 @@ import { Message } from 'element-ui'
 import { postRequest } from '../utils/api.js'
 export default {
   name: 'SearchForm',
-  props: ['params'],
+  props: ['params','addData'],
   data() {
     return {
       total: 0,
@@ -175,16 +175,23 @@ export default {
         interval,
       }
       console.log('开始查询!请等待~');
+      // console.log(this.qs.stringify(newDate));
+      // console.log(JSON.stringify(newDate));      
+      // console.log(newDate);      
       const { data: res } = await this.$axios.post(
         newUrl,
-        this.qs.stringify(newDate)
+        newDate
       ).catch(err=>{
         if(err){
           Message.error({message:'登陆状态已失效,请重新登录!'})
           return;
         }
       })
+      if(res.status === 1){
+        Message.error({message:'未找到数据表单!请向管理员反馈!'})
+      }
       console.log('查询结束!');
+      console.log(res);
       this.total = res.data.length
       this.dataList = res.data
       this.$store.state.total = this.total
@@ -193,6 +200,7 @@ export default {
       let endTime = Date.now()
       let pass = endTime - startTime
       this.$store.state.passTime = pass + 'ms'
+      this.addData(res.data)
     },
   },
 }

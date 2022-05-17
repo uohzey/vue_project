@@ -72,7 +72,7 @@ export default {
       this.$refs.LoginFormData.validate(async (valid) => {
         if (valid) {
           //通过axios调用后端接口
-          postRequest("/api/login", this.qs.stringify(this.LoginFormData)).then(
+          postRequest("/api/login", this.LoginFormData).then(
             (res) => {
               if (res.data.status === 200) {
                 window.sessionStorage.setItem('token', res.data.token)

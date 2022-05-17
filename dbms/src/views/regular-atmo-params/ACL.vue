@@ -1,7 +1,7 @@
 <template>
   <div>
-    <search-form params="acl" ref="aclData"></search-form>
-    <data-form :params="options"></data-form>
+    <search-form params="acl" :addData="addData"></search-form>
+    <data-form :titles="titles" :tableData="tableData"></data-form>
     <data-analyse></data-analyse>
   </div>
 </template>
@@ -15,7 +15,8 @@ export default {
   components: { SearchForm, DataAnalyse, DataForm },
   data() {
     return {
-      options:[
+      tableData:[],
+      titles:[
         {
           prop:'date',
           label:'日期'
@@ -30,6 +31,12 @@ export default {
         }
       ],
     }
+  },
+  methods: {
+    addData(newData){
+      this.tableData = newData
+      console.log(this.tableData);
+    },
   },
 }
 </script>
