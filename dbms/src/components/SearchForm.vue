@@ -57,7 +57,7 @@ import { Message } from 'element-ui'
 import { postRequest } from '../utils/api.js'
 export default {
   name: 'SearchForm',
-  props: ['params','addData'],
+  props: ['params','updateData'],
   data() {
     return {
       total: 0,
@@ -200,7 +200,8 @@ export default {
       let endTime = Date.now()
       let pass = endTime - startTime
       this.$store.state.passTime = pass + 'ms'
-      this.addData(res.data)
+      this.updateData()
+      this.$store.state.isChanged = !this.$store.state.isChanged
     },
   },
 }

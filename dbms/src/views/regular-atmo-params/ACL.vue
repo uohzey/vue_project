@@ -1,7 +1,7 @@
 <template>
   <div>
-    <search-form params="acl" :addData="addData"></search-form>
-    <data-form :titles="titles" :tableData="tableData"></data-form>
+    <search-form params="acl" :updateData="updateData"></search-form>
+    <data-form :titles="titles" :isChanged="isChanged"></data-form>
     <data-analyse></data-analyse>
   </div>
 </template>
@@ -12,30 +12,29 @@ import DataForm from '@/components/DataForm.vue'
 import DataAnalyse from '@/components/DataAnalyse.vue'
 export default {
   name: 'ACL',
-  components: { SearchForm, DataAnalyse, DataForm },
+  components: { SearchForm, DataForm, DataAnalyse },
   data() {
     return {
-      tableData:[],
-      titles:[
+      isChanged: true,
+      titles: [
         {
-          prop:'date',
-          label:'日期'
+          prop: 'date',
+          label: '日期'
         },
         {
-          prop:'time',
-          label:'时间'
+          prop: 'time',
+          label: '时间'
         },
         {
-          prop:'r0',
-          label:'r0'
+          prop: 'r0',
+          label: '大气相干长度'
         }
       ],
     }
   },
   methods: {
-    addData(newData){
-      this.tableData = newData
-      console.log(this.tableData);
+    updateData() {
+      this.isChanged = !this.isChanged
     },
   },
 }

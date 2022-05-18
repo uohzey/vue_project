@@ -8,7 +8,6 @@ export default new Vuex.Store({
     total: 0,
     dataList: [],
     passTime: 0,
-    isChanged: true,
   },
   getters: {
   },
